@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private int computerSelectedNumber;
     private static final int BOUND = 21; //Setting bound to 21, will generate numbers between 0 & 20
     private Random random;
+    private boolean hasGuessed = false;
 
     public void onStratOverButtonClick(View v) {
         EditText userNumber = findViewById(R.id.editTextNumber);
@@ -23,12 +24,21 @@ public class MainActivity extends AppCompatActivity {
         userMsg.setText("");
         userNumber.setText("");
         computerSelectedNumber = random.nextInt(BOUND);
+        hasGuessed = false;
     }
     public void onGuessButtonClick(View v) {
         EditText userNumber = findViewById(R.id.editTextNumber);
         TextView userMsg = findViewById(R.id.textView3);
         String guess = userNumber.getText().toString();
         String msg = "";
+
+        if (hasGuessed) {
+            userMsg.setText(R.string.msg_start_over);
+            Toast.makeText(this,
+                    "You already guessed " + computerSelectedNumber + " Press Start Over",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if(guess.length() == 0) {
             Toast.makeText(this, "You forgot to enter your guess!",
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (number == computerSelectedNumber) {
                 msg = "Your guess is right.";
                 Log.i("app", "Your guess is right.");
+                hasGuessed = true;
             }
         }
         userMsg.setText(msg);
@@ -63,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         random = new Random();
         computerSelectedNumber = random.nextInt(BOUND);
+        hasGuessed = false;
         setContentView(R.layout.activity_main);
     }
 }
