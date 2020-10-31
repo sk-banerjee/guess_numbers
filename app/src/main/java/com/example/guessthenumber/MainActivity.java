@@ -14,7 +14,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     private int computerSelectedNumber;
-    private static final int BOUND = 20;
+    private static final int BOUND = 21; //Setting bound to 21, will generate numbers between 0 & 20
     private Random random;
 
     public void onStratOverButtonClick(View v) {
