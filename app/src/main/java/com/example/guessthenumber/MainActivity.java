@@ -32,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         String guess = userNumber.getText().toString();
         String msg = "";
 
+        if(guess.length() == 0) {
+            Toast.makeText(this, "You forgot to enter your guess!",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int number = Integer.parseInt(guess);
+
         if (hasGuessed) {
             userMsg.setText(R.string.msg_start_over);
             Toast.makeText(this,
@@ -39,14 +46,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-
-        if(guess.length() == 0) {
-            Toast.makeText(this, "You forgot to enter your guess!",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int number = Integer.parseInt(guess);
 
         Log.i("app", computerSelectedNumber + " is selected number.");
         if(number < 0 || number > BOUND) {
